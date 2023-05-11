@@ -1,6 +1,6 @@
-const setupGraphql = require('./src/graphql/setupGraphql');
-const errors = require('./src/errors');
-const wrap = require('./src/wrap');
+const setupGraphql = require('./graphql/setupGraphql');
+const errors = require('./errors');
+const wrap = require('./express/wrap');
 
 module.exports = {
   setupGraphql,
