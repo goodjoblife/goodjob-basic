@@ -3,7 +3,11 @@ const Joi = require('joi');
 const winston = require('winston');
 const expressPlayground =
   require('graphql-playground-middleware-express').default;
-const { AuthenticationError, NotFoundError } = require('../errors');
+const {
+  AuthenticationError,
+  NotFoundError,
+  UserInputError,
+} = require('../errors');
 
 const GRAPHQL_ENDPOINT = '/graphql';
 
@@ -14,6 +18,8 @@ const defaultFormatError = (err) => {
     err.extensions.code = 'UNAUTHORIZED';
   } else if (err.originalError instanceof NotFoundError) {
     err.extensions.code = 'NOT_FOUND';
+  } else if (err.originalError instanceof UserInputError) {
+    err.extensions.code = 'BAD_USER_INPUT';
   } else if (err.originalError instanceof Joi.ValidationError) {
     err.extensions.code = 'BAD_USER_INPUT';
   }
